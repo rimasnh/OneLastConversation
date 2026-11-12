@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Upload, X, ShieldCheck, Info, Heart, Lock, Sparkles } from "lucide-react";
+import { Upload, X, Mic, Video, ShieldCheck, Info, Heart, Lock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import hero from "@/assets/memorial_hero.png.asset.json";
+import hero from "@/assets/ai_handshake.jpg.asset.json";
 import sample from "@/assets/sample_companion.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -22,7 +22,8 @@ export const Route = createFileRoute("/")({
 const field = "w-full rounded-xl border border-input bg-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-ring";
 
 function Index() {
-  const [photo, setPhoto] = useState<string | null>(null);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const photo = photos.length > 0;
   const [allowed, setAllowed] = useState("");
   const [avoid, setAvoid] = useState("");
   const [memories, setMemories] = useState("");
@@ -30,16 +31,28 @@ function Index() {
   const inputRef = useRef<HTMLInputElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => () => { if (photo) URL.revokeObjectURL(photo); }, [photo]);
+  const photosRef = useRef<string[]>([]);
+  photosRef.current = photos;
+  useEffect(() => () => photosRef.current.forEach((u) => URL.revokeObjectURL(u)), []);
 
-  const onFile = (f?: File) => {
-    if (!f || !f.type.startsWith("image/")) return;
-    setPhoto(URL.createObjectURL(f));
-  };
-  const removePhoto = () => {
-    setPhoto(null);
-    setShowPreview(false);
+  const onFiles = (list?: FileList | null) => {
+    if (!list) return;
+    const urls = Array.from(list).filter((f) => f.type.startsWith("image/")).map((f) => URL.createObjectURL(f));
+    if (urls.length) setPhotos((p) => [...p, ...urls]);
     if (inputRef.current) inputRef.current.value = "";
+  };
+  const removePhoto = (url: string) => {
+    URL.revokeObjectURL(url);
+    setPhotos((p) => {
+      const next = p.filter((u) => u !== url);
+      if (!next.length) setShowPreview(false);
+      return next;
+    });
+  };
+  const removeAll = () => {
+    photos.forEach((u) => URL.revokeObjectURL(u));
+    setPhotos([]);
+    setShowPreview(false);
   };
   const create = () => {
     setShowPreview(true);
@@ -67,7 +80,7 @@ function Index() {
         </div>
         <div className="relative">
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-accent/60 rotate-2" />
-          <img src={hero.url} alt="A smiling man in a navy shirt outdoors" className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-soft" />
+          <img src={hero.url} alt="A human hand and a robotic hand reaching toward each other" className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-soft" />
         </div>
       </section>
 
@@ -89,31 +102,50 @@ function Index() {
       {/* Create */}
       <section id="create" className="mx-auto max-w-3xl scroll-mt-24 px-6 pt-24">
         <h2 className="text-center text-4xl">Create a preview</h2>
-        <p className="mt-2 text-center text-muted-foreground">Three gentle steps. Nothing is sent anywhere.</p>
+        <p className="mt-2 text-center text-muted-foreground">A few gentle steps. Nothing is sent anywhere.</p>
 
         <div className="mt-10 space-y-8 rounded-3xl bg-card p-6 shadow-soft md:p-10">
           <div>
-            <h3 className="text-2xl">1. Upload a photo</h3>
-            {photo ? (
-              <div className="mt-4 flex items-center gap-4">
-                <img src={photo} alt="Your uploaded photo" className="size-28 rounded-2xl object-cover" />
-                <Button variant="outline" onClick={removePhoto}><X /> Remove photo</Button>
+            <h3 className="text-2xl">1. Upload photos</h3>
+            <p className="mt-1 text-sm text-muted-foreground">Add one or more photos. One is enough to continue.</p>
+            {photo && (
+              <div className="mt-4 flex flex-wrap gap-3">
+                {photos.map((u, i) => (
+                  <div key={u} className="relative">
+                    <img src={u} alt={`Uploaded photo ${i + 1}`} className="size-24 rounded-2xl object-cover" />
+                    <button type="button" onClick={() => removePhoto(u)} aria-label={`Remove photo ${i + 1}`} className="absolute -right-2 -top-2 rounded-full bg-foreground p-1 text-background shadow-soft"><X className="size-3" /></button>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <label
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => { e.preventDefault(); onFile(e.dataTransfer.files[0]); }}
-                className="mt-4 flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-border bg-muted/50 p-10 text-center text-sm text-muted-foreground hover:bg-muted"
-              >
-                <Upload className="size-6 text-primary" />
-                Click or drop an image here
-                <input ref={inputRef} type="file" accept="image/*" className="sr-only" onChange={(e) => onFile(e.target.files?.[0])} />
-              </label>
             )}
+            <label
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => { e.preventDefault(); onFiles(e.dataTransfer.files); }}
+              className="mt-4 flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-border bg-muted/50 p-8 text-center text-sm text-muted-foreground hover:bg-muted"
+            >
+              <Upload className="size-6 text-primary" />
+              {photo ? "Add more photos" : "Click or drop images here"}
+              <input ref={inputRef} type="file" accept="image/*" multiple className="sr-only" onChange={(e) => onFiles(e.target.files)} />
+            </label>
+            {photo && <Button variant="outline" className="mt-3" onClick={removeAll}><X /> Remove all photos</Button>}
           </div>
 
+          {[
+            { icon: Mic, t: "2. Upload a voice recording" },
+            { icon: Video, t: "3. Upload a video recording" },
+          ].map(({ icon: I, t }) => (
+            <div key={t} aria-disabled className="opacity-70">
+              <h3 className="flex flex-wrap items-center gap-3 text-2xl">{t}
+                <span className="rounded-full bg-accent px-3 py-0.5 font-sans text-xs text-accent-foreground">Upcoming</span>
+              </h3>
+              <div className="mt-4 flex flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-border bg-muted/30 p-8 text-center text-sm text-muted-foreground">
+                <I className="size-6" /> Coming soon — not available in this demo
+              </div>
+            </div>
+          ))}
+
           <div className="space-y-4">
-            <h3 className="text-2xl">2. Set boundaries</h3>
+            <h3 className="text-2xl">4. Set boundaries</h3>
             <label className="block text-sm font-medium">What the companion may discuss
               <textarea className={`${field} mt-2`} rows={2} value={allowed} onChange={(e) => setAllowed(e.target.value)} placeholder="Family trips, favorite recipes, his love of cricket…" />
             </label>
@@ -127,7 +159,7 @@ function Index() {
 
           <div className="flex gap-3 rounded-2xl bg-secondary p-4 text-sm text-secondary-foreground">
             <Lock className="mt-0.5 size-4 shrink-0" />
-            <p><strong>Privacy note:</strong> Your photo and answers stay in this browser tab only. They are not uploaded, stored, or used to train anything, and are cleared when you remove the photo or close the page.</p>
+            <p><strong>Privacy note:</strong> Your photo and answers stay in this browser tab only. They are not uploaded, stored, or used to train anything, and are cleared when you remove the photos or close the page.</p>
           </div>
 
           <Button size="lg" className="w-full rounded-full" onClick={create} disabled={!photo}>
