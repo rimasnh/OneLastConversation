@@ -16,7 +16,7 @@ export const Route = createFileRoute("/help")({
   component: Help,
 });
 
-const faqs = [
+const faqs: [string, string][] = [
   ["Is this really my loved one?", "No. OneLastConversion is a reflection tool. It never represents real communication with someone who has passed away."],
   ["Is the preview made from my photo?", "Not in this demo. The preview is a pre-made sample animation shown to everyone."],
   ["Where is my photo stored?", "In this demo, nowhere. It stays in your browser tab and disappears when you remove it or close the page."],
