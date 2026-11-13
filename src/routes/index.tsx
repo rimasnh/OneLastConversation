@@ -183,7 +183,7 @@ function Index() {
           </p>
           <div className="mt-8 flex gap-3">
             <Button size="lg" className="rounded-full" asChild><a href="#create">Try the demo</a></Button>
-            <Button size="lg" variant="outline" className="rounded-full bg-transparent" asChild><Link to="/boundaries">See boundary settings</Link></Button>
+            <Button size="lg" variant="outline" className="rounded-full bg-transparent" asChild><Link to="/pricing">See pricing</Link></Button>
           </div>
         </div>
         <div className="relative">

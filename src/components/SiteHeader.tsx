@@ -10,7 +10,7 @@ export function SiteHeader() {
         <Link to="/" className="font-display text-2xl text-primary">OneLastConversion</Link>
         <nav className="flex items-center gap-6">
           <Link to="/" className={linkCls} activeProps={activeCls} activeOptions={{ exact: true }}>Home</Link>
-          <Link to="/boundaries" className={linkCls} activeProps={activeCls}>Boundary settings</Link>
+          <Link to="/pricing" className={linkCls} activeProps={activeCls}>Pricing</Link>
           <Link to="/help" className={linkCls} activeProps={activeCls}>Help</Link>
         </nav>
       </div>
