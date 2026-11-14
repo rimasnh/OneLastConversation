@@ -12,6 +12,7 @@ export function SiteHeader() {
           <Link to="/" className={linkCls} activeProps={activeCls} activeOptions={{ exact: true }}>Home</Link>
           <Link to="/pricing" className={linkCls} activeProps={activeCls}>Pricing</Link>
           <Link to="/help" className={linkCls} activeProps={activeCls}>Help</Link>
+          <Link to="/signin" className={linkCls} activeProps={activeCls}>Sign in</Link>
         </nav>
       </div>
     </header>

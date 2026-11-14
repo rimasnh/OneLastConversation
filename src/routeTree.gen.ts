@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BoundariesRouteImport } from './routes/boundaries'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as SigninRouteImport } from './routes/signin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/boundaries': typeof BoundariesRoute
   '/help': typeof HelpRoute
   '/pricing': typeof PricingRoute
+  '/signin': typeof SigninRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/boundaries': typeof BoundariesRoute
   '/help': typeof HelpRoute
   '/pricing': typeof PricingRoute
+  '/signin': typeof SigninRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/boundaries': typeof BoundariesRoute
   '/help': typeof HelpRoute
   '/pricing': typeof PricingRoute
+  '/signin': typeof SigninRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/boundaries' | '/help' | '/pricing'
+  fullPaths: '/' | '/boundaries' | '/help' | '/pricing' | '/signin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/boundaries' | '/help' | '/pricing'
-  id: '__root__' | '/' | '/boundaries' | '/help' | '/pricing'
+  to: '/' | '/boundaries' | '/help' | '/pricing' | '/signin'
+  id: '__root__' | '/' | '/boundaries' | '/help' | '/pricing' | '/signin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   BoundariesRoute: typeof BoundariesRoute
   HelpRoute: typeof HelpRoute
   PricingRoute: typeof PricingRoute
+  SigninRoute: typeof SigninRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   BoundariesRoute: BoundariesRoute,
   HelpRoute: HelpRoute,
   PricingRoute: PricingRoute,
+  SigninRoute: SigninRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
