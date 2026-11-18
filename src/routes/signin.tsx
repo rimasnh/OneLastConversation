@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/signin")({
   head: () => ({
     meta: [
-      { title: "Sign in — OneLastConversion" },
-      { name: "description", content: "Sign in to OneLastConversion to manage your memorial companion previews." },
-      { property: "og:title", content: "Sign in — OneLastConversion" },
-      { property: "og:description", content: "Sample sign-in options for the OneLastConversion demo." },
+      { title: "Sign in — OneLastConversation" },
+      { name: "description", content: "Sign in to OneLastConversation to manage your memorial companion previews." },
+      { property: "og:title", content: "Sign in — OneLastConversation" },
+      { property: "og:description", content: "Sample sign-in options for the OneLastConversation demo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

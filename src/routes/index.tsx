@@ -9,9 +9,9 @@ import { getCompanionVideo, startCompanionVideo } from "@/lib/companion-video.fu
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "OneLastConversion — A respectful AI memorial companion" },
+      { title: "OneLastConversation — A respectful AI memorial companion" },
       { name: "description", content: "Honor a loved one's memory with a gentle, boundary-respecting AI companion. Try the sample preview." },
-      { property: "og:title", content: "OneLastConversion — A respectful AI memorial companion" },
+      { property: "og:title", content: "OneLastConversation — A respectful AI memorial companion" },
       { property: "og:description", content: "Upload a photo, set boundaries, and view a sample demo preview." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -179,7 +179,7 @@ function Index() {
             Keep their stories close, <em className="text-primary">gently.</em>
           </h1>
           <p className="mt-6 max-w-md text-lg text-muted-foreground">
-            OneLastConversion helps you reflect on cherished memories through a companion you shape — with boundaries you set, and privacy you control.
+            OneLastConversation helps you reflect on cherished memories through a companion you shape — with boundaries you set, and privacy you control.
           </p>
           <div className="mt-8 flex gap-3">
             <Button size="lg" className="rounded-full" asChild><a href="#create">Try the demo</a></Button>

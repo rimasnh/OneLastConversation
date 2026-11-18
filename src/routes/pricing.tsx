@@ -6,10 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — OneLastConversion" },
-      { name: "description", content: "Sample pricing plans for the OneLastConversion memorial companion demo." },
-      { property: "og:title", content: "Pricing — OneLastConversion" },
-      { property: "og:description", content: "Sample pricing plans for the OneLastConversion memorial companion demo." },
+      { title: "Pricing — OneLastConversation" },
+      { name: "description", content: "Sample pricing plans for the OneLastConversation memorial companion demo." },
+      { property: "og:title", content: "Pricing — OneLastConversation" },
+      { property: "og:description", content: "Sample pricing plans for the OneLastConversation memorial companion demo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -91,7 +91,7 @@ function PricingPage() {
       </div>
 
       <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-muted-foreground">
-        OneLastConversion is an AI companion, not the person who died and not grief therapy. Memorial companions
+        OneLastConversation is an AI companion, not the person who died and not grief therapy. Memorial companions
         cannot be published or used romantically.
       </p>
     </main>

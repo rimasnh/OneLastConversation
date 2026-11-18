@@ -4,9 +4,9 @@ import { ShieldCheck, Heart, Camera, Ban, BookOpen, MessageCircle } from "lucide
 export const Route = createFileRoute("/boundaries")({
   head: () => ({
     meta: [
-      { title: "Boundary Settings — OneLastConversion" },
+      { title: "Boundary Settings — OneLastConversation" },
       { name: "description", content: "Sample boundary settings for a memorial companion: allowed topics, topics to avoid, and shared memories." },
-      { property: "og:title", content: "Boundary Settings — OneLastConversion" },
+      { property: "og:title", content: "Boundary Settings — OneLastConversation" },
       { property: "og:description", content: "Sample boundaries, guidelines, and honesty notes for the memorial companion demo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -48,7 +48,7 @@ function Boundaries() {
         <div>
           <h2 className="text-2xl">An AI companion — with honesty</h2>
           <p className="mt-2 text-sm leading-relaxed">
-            OneLastConversion is an <strong>AI companion</strong>. It is <strong>not the person who died</strong> and
+            OneLastConversation is an <strong>AI companion</strong>. It is <strong>not the person who died</strong> and
             it is <strong>not grief therapy</strong>. It is a reflection tool for remembering, and it can never
             replace professional support or real human connection.
           </p>

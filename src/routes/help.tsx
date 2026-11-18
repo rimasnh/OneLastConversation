@@ -5,9 +5,9 @@ import { Mail, BookOpen, HeartHandshake } from "lucide-react";
 export const Route = createFileRoute("/help")({
   head: () => ({
     meta: [
-      { title: "Help Center — OneLastConversion" },
-      { name: "description", content: "Answers about privacy, boundaries, and how OneLastConversion works." },
-      { property: "og:title", content: "Help Center — OneLastConversion" },
+      { title: "Help Center — OneLastConversation" },
+      { name: "description", content: "Answers about privacy, boundaries, and how OneLastConversation works." },
+      { property: "og:title", content: "Help Center — OneLastConversation" },
       { property: "og:description", content: "Frequently asked questions and support resources." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/help")({
 });
 
 const faqs: [string, string][] = [
-  ["Is this really my loved one?", "No. OneLastConversion is a reflection tool. It never represents real communication with someone who has passed away."],
+  ["Is this really my loved one?", "No. OneLastConversation is a reflection tool. It never represents real communication with someone who has passed away."],
   ["Is the preview made from my photo?", "Not in this demo. The preview is a pre-made sample animation shown to everyone."],
   ["Where is my photo stored?", "In this demo, nowhere. It stays in your browser tab and disappears when you remove it or close the page."],
   ["How do boundaries work?", "You list topics the companion may discuss and topics to avoid. In the full product, those rules would guide every response."],
@@ -34,7 +34,7 @@ function Help() {
         {[
           { i: BookOpen, t: "Getting started", d: "Create your first preview in minutes." },
           { i: HeartHandshake, t: "Grief resources", d: "Gentle support guides and hotlines." },
-          { i: Mail, t: "Contact us", d: "support@onelastconversion.example" },
+          { i: Mail, t: "Contact us", d: "support@onelastconversation.example" },
         ].map(({ i: I, t, d }) => (
           <div key={t} className="rounded-2xl bg-card p-6 shadow-soft">
             <I className="size-5 text-primary" />
