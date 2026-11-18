@@ -170,7 +170,7 @@ function Index() {
   return (
     <main>
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-2 md:py-24">
+      <section className="mx-auto grid max-w-6xl items-center gap-12 overflow-x-clip px-6 py-16 md:grid-cols-2 md:py-24">
         <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground">
             <Heart className="size-3" /> Remembrance, with care

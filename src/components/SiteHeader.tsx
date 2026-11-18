@@ -6,9 +6,9 @@ const activeCls = { className: "text-sm text-foreground font-semibold" };
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="font-display text-2xl text-primary">OneLastConversation</Link>
-        <nav className="flex items-center gap-6">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-4 sm:flex-row sm:justify-between sm:px-6">
+        <Link to="/" className="font-display text-xl text-primary sm:text-2xl">OneLastConversation</Link>
+        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 sm:gap-6">
           <Link to="/" className={linkCls} activeProps={activeCls} activeOptions={{ exact: true }}>Home</Link>
           <Link to="/pricing" className={linkCls} activeProps={activeCls}>Pricing</Link>
           <Link to="/help" className={linkCls} activeProps={activeCls}>Help</Link>
